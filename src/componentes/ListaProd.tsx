@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const ListaProd = ({ productos }) => {
-  const precioTotal = productos.reduce((total, producto) => total + producto.precio, 0);
+const ListaProd = ({
+  productos,
+  sumarCantidad,
+  restarCantidad,
+  eliminarProducto,
+}) => {
+  const [precioTotal, setPrecioTotal] = useState(0);
+
+  useEffect(() => {
+    calcularPrecioTotal();
+  }, [productos]);
+
+  const calcularPrecioTotal = () => {
+    const total = productos.reduce((total, producto) => {
+      return total + producto.precio * producto.cantidad;
+    }, 0);
+    setPrecioTotal(total);
+  };
 
   return (
     <section>
@@ -11,13 +27,17 @@ const ListaProd = ({ productos }) => {
           <li key={i}>
             <strong>{producto.nombre}</strong> - ${producto.precio.toFixed(2)}
             {producto.descripcion && <p>{producto.descripcion}</p>}
+            <p>Cantidad: {producto.cantidad}</p>
+            <button onClick={() => sumarCantidad(i)}>+</button>
+            <button onClick={() => restarCantidad(i)}>-</button>
+            <button onClick={() => eliminarProducto(i)}>Eliminar</button>
           </li>
         ))}
       </ul>
 
       <p>Precio total: ${precioTotal.toFixed(2)}</p>
     </section>
-  )
-}
+  );
+};
 
 export default ListaProd;
