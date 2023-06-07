@@ -1,13 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { CardCargaProd, FormCargaProd } from "../styles/styles";
 
 const CargaProd = (props: { agregarProducto: Function }) => {
   const { agregarProducto } = props;
-  // if (typeof agregarProducto !== "function") {
-  //   console.error("La prop agregarProducto debe ser una función.");
-  //   return null;
-  // }
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
@@ -30,9 +25,9 @@ const CargaProd = (props: { agregarProducto: Function }) => {
   };
 
   return (
-    <CardCargaProd>
+    <section className="cardCargaProd">
       <h1>Cargar Producto</h1>
-      <FormCargaProd onSubmit={handleSubmit}>
+      <form className="formCargaProd" onSubmit={handleSubmit}>
         <label htmlFor="nombre">Nombre del Producto</label>
         <input
           type="text"
@@ -58,8 +53,8 @@ const CargaProd = (props: { agregarProducto: Function }) => {
           required
         />
         <button type="submit">Agregar</button>
-      </FormCargaProd>
-    </CardCargaProd>
+      </form>
+    </section>
   );
 };
 

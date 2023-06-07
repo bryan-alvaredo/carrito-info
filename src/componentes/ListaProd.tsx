@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
-import { Boton } from "../styles/styles";
 
 const ListaProd = ({
   productos,
@@ -15,32 +14,48 @@ const ListaProd = ({
   }, [productos]);
 
   const calcularPrecioTotal = () => {
-    const total = productos.reduce((total: number, producto: { precio: number; cantidad: number; }) => {
-      return total + producto.precio * producto.cantidad;
-    }, 0);
+    const total = productos.reduce(
+      (total: number, producto: { precio: number; cantidad: number }) => {
+        return total + producto.precio * producto.cantidad;
+      },
+      0
+    );
     setPrecioTotal(total);
   };
 
   return (
     <>
-      <section>
+      <section className="seccionLista">
         <h2>Lista de Productos</h2>
-        <ul>
+        <section>
           {productos.map((producto, i) => (
-            <li key={i}>
-              <button onClick={() => eliminarProducto(i)}><FaTrashAlt /></button>
-              <p>{producto.nombre}</p>
-              {producto.descripcion && <p>{producto.descripcion}</p>}
-              <p>${producto.precio.toFixed(2)}</p>
-              <Boton onClick={() => sumarCantidad(i)}>+</Boton>
-              <p>Cantidad: {producto.cantidad}</p>
-              <button onClick={() => restarCantidad(i)}>-</button>
-            </li>
+            <article key={i} className="producto">
+              {console.log(i)}
+              <button className="eliminar" onClick={() => eliminarProducto(i)}>
+                <FaTrashAlt />
+              </button>
+              <p className="nombre">{producto.nombre}</p>
+              {producto.descripcion && (
+                <p className="descripcion">{producto.descripcion}</p>
+              )}
+              <p className="precio">${producto.precio.toFixed(2)}</p>
+              <article>
+                <button className="suma" onClick={() => sumarCantidad(i)}>
+                  +
+                </button>
+                <button className="resta" onClick={() => restarCantidad(i)}>
+                  -
+                </button>
+              </article>
+              <p className="cantidad">Cantidad: {producto.cantidad}</p>
+            </article>
           ))}
-        </ul>
+        </section>
       </section>
-      <section>
-        <p><FaShoppingCart /> ${precioTotal.toFixed(2)}</p>
+      <section className="infoCarrito">
+        <p>
+          <FaShoppingCart /> ${precioTotal.toFixed(2)}
+        </p>
       </section>
     </>
   );
