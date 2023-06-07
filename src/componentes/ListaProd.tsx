@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+import { Boton } from "../styles/styles";
 
 const ListaProd = ({
   productos,
@@ -20,23 +22,27 @@ const ListaProd = ({
   };
 
   return (
-    <section>
-      <h2>Lista de Productos</h2>
-      <ul>
-        {productos.map((producto, i) => (
-          <li key={i}>
-            <strong>{producto.nombre}</strong> - ${producto.precio.toFixed(2)}
-            {producto.descripcion && <p>{producto.descripcion}</p>}
-            <p>Cantidad: {producto.cantidad}</p>
-            <button onClick={() => sumarCantidad(i)}>+</button>
-            <button onClick={() => restarCantidad(i)}>-</button>
-            <button onClick={() => eliminarProducto(i)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
-
-      <p>Precio total: ${precioTotal.toFixed(2)}</p>
-    </section>
+    <>
+      <section>
+        <h2>Lista de Productos</h2>
+        <ul>
+          {productos.map((producto, i) => (
+            <li key={i}>
+              <button onClick={() => eliminarProducto(i)}><FaTrashAlt /></button>
+              <p>{producto.nombre}</p>
+              {producto.descripcion && <p>{producto.descripcion}</p>}
+              <p>${producto.precio.toFixed(2)}</p>
+              <Boton onClick={() => sumarCantidad(i)}>+</Boton>
+              <p>Cantidad: {producto.cantidad}</p>
+              <button onClick={() => restarCantidad(i)}>-</button>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <p><FaShoppingCart /> ${precioTotal.toFixed(2)}</p>
+      </section>
+    </>
   );
 };
 
