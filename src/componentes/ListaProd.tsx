@@ -15,7 +15,7 @@ const ListaProd = ({
   }, [productos]);
 
   const calcularPrecioTotal = () => {
-    const total = productos.reduce((total, producto) => {
+    const total = productos.reduce((total: number, producto: { precio: number; cantidad: number; }) => {
       return total + producto.precio * producto.cantidad;
     }, 0);
     setPrecioTotal(total);

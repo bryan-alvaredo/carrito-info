@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { CardCargaProd, FormCargaProd } from "../styles/styles";
 
-const CargaProd = (props) => {
+const CargaProd = (props: { agregarProducto: Function; }) => {
   const { agregarProducto } = props;
   if (typeof agregarProducto !== "function") {
     console.error("La prop agregarProducto debe ser una función.");
@@ -13,7 +13,7 @@ const CargaProd = (props) => {
   const [precio, setPrecio] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     const producto = {
