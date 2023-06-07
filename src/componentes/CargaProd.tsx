@@ -2,18 +2,18 @@ import React from "react";
 import { useState } from "react";
 import { CardCargaProd, FormCargaProd } from "../styles/styles";
 
-const CargaProd = (props: { agregarProducto: Function; }) => {
+const CargaProd = (props: { agregarProducto: Function }) => {
   const { agregarProducto } = props;
-  if (typeof agregarProducto !== "function") {
-    console.error("La prop agregarProducto debe ser una función.");
-    return null;
-  }
+  // if (typeof agregarProducto !== "function") {
+  //   console.error("La prop agregarProducto debe ser una función.");
+  //   return null;
+  // }
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: { target: any; preventDefault: () => void }) => {
     event.preventDefault();
 
     const producto = {
@@ -26,7 +26,7 @@ const CargaProd = (props: { agregarProducto: Function; }) => {
     setNombre("");
     setPrecio("");
     setDescripcion("");
-    // event.target.reset();
+    event.target.reset();
   };
 
   return (
